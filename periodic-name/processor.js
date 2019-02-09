@@ -19,7 +19,7 @@ const readInterface = readline.createInterface({
 function question(query) {
   return new Promise((resolve, reject) => {
     try {
-      readInterface.question(query, name => resolve(name))
+      readInterface.question(query, resolve);
     }
     catch(err) {
       reject(err);
@@ -28,23 +28,29 @@ function question(query) {
 }
 
 
-const availability = (checkList, checkSet) => {
+function availability(checkList, checkSet) {
   return checkList.map((el) => checkSet.has(el))
 }
 
-const processName = (name, checkSet) => {
+function processName(name) {
   let singles = Array.from(name).map((char) => char.toLowerCase())
   let doubles = singles.map((char, i) => singles[i] + singles[i + 1])
   // the last character gets joined to undefined, so drop that...
   doubles = doubles.splice(0, doubles.length - 1)
-  console.log(availability(doubles, checkSet))
-  console.log(availability(singles, checkSet))
+  return {singles, doubles};
+}
+
+function gobots({singles, doubles}) {
+  console.log(singles, doubles)
 }
 
 const main = () => {
   const symbolSet = new Set(table.elements.map((e) => e.symbol.toLowerCase()));
   question('What name should I check?\n>')
-    .then(name => processName(name, symbolSet));
+    .then(name => processName(name))
+    .then(gobots)
+    .then(() => readInterface.close());
+
 }
 
 main()
