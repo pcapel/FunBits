@@ -2,7 +2,7 @@
 \ o /
  \|/
   |
-/ \
+ / \
 weeeee!!!!!
 
 I'm bad as ascii art...
