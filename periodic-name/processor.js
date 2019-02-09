@@ -15,7 +15,6 @@ const readInterface = readline.createInterface({
   output: process.stdout
 });
 
-
 function question(query) {
   return new Promise((resolve, reject) => {
     try {
@@ -26,7 +25,6 @@ function question(query) {
     }
   });
 }
-
 
 function availability(checkList, checkSet) {
   return checkList.map((el) => checkSet.has(el))
