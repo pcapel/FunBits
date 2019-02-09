@@ -34,15 +34,6 @@ import json
 from os.path import join
 
 
-def iterand(bool_list):
-    """Aggregate AND over list of boolean values
-    """
-    value = bool_list[0]
-    for nxt in bool_list[1:]:
-        value = value and nxt
-    return value
-
-
 def split_up(name):
     singles = [char for char in name]
     # you'll always end up with an extra 1 character on the end
@@ -64,8 +55,6 @@ def availability(check_list, check_set):
 
 
 def main():
-    """
-    """
     table = table_set()
     name = input('What\'s your name?\n>').lower()
     solutions = dict()
@@ -73,7 +62,7 @@ def main():
     s_avail = availability(singles, table)
     d_avail = availability(doubles, table)
     for char, i in enumerate(s_avail):
-        single_works = iterand(s_avail[i:i+2])
+        single_works = all(s_avail[i:i+2])
         double_works = d_avail[i]
         print(single_works or double_works)
 
